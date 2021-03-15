@@ -23,6 +23,10 @@ leave_prog()
 
 get_build_tag()
 {
+    script_located_path=$(dirname $(readlink -f "$0"))
+    echo "script_located_path=$script_located_path"
+    exit
+
     # read tag_number from ALAMEDASERVICE_FILE_PATH
     if [ "${ALAMEDASERVICE_FILE_PATH}" != "" ]; then
         tag_number=`grep "^[[:space:]]*version:[[:space:]]" $ALAMEDASERVICE_FILE_PATH|grep -v 'version: ""'|awk -F'[^ \t]' '{print length($1), $0}'|sort -k1 -n|head -1|awk '{print $3}'`
